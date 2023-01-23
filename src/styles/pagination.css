@@ -17,6 +17,7 @@
   color: var(--gray);
   text-decoration: none;
 }
+/* Pagination styles */
 
 .page-item a.page-link:hover {
   background-color: #cccccc;

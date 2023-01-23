@@ -1,11 +1,11 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import requestService from "../../services/requests";
-import { Button } from "../../components/Button";
-import { Table } from "../../components/Table";
+import requestService from "../services/requests";
+import { Button } from "../components/Button";
+import { Table } from "../components/Table";
 import { Link } from "react-router-dom";
-import { InputField } from "../../components/InputField";
-import { Dropdown } from "../../components/Dropdown";
-import { ITodos } from "../../@types";
+import { InputField } from "../components/InputField";
+import { Dropdown } from "../components/Dropdown";
+import { ITodos } from "../@types";
 
 const options = [{ label: 'true', value: "true" }, { label: 'false', value: "false" }]
 
@@ -14,10 +14,10 @@ const Dashboard = () => {
     const [filteredTasks, setFilteredTasks] = useState(tasks);
     const [isLoading, setIsLoading] = useState(true)
     const [filterBy, setFilterBy] = useState({
-        userId: "",
+        title: "",
         completed: "false",
     })
-    const { userId, completed } = filterBy
+    const { title, completed } = filterBy
     const handleFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target
         setFilterBy({
@@ -42,14 +42,14 @@ const Dashboard = () => {
 
     useEffect(() => {
         const filteredData = tasks.filter
-            ((task: ITodos) => task.userId === +userId
+            ((task: ITodos) => task.title.includes(title)
                 && task.completed ===
                 (completed === "true"))
         if (filteredData.length) {
             return setFilteredTasks(filteredData || tasks)
         }
         return setFilteredTasks(tasks)
-    }, [completed, tasks, userId])
+    }, [completed, tasks, title])
 
 
     return (
@@ -62,11 +62,11 @@ const Dashboard = () => {
             </header>
             <form className="filter-form">
                 <InputField
-                    name="userId"
-                    label="Filter by UserId:"
-                    value={userId}
+                    name="title"
+                    label="Filter by title:"
+                    value={title}
                     onChange={handleFilterChange}
-                    placeholder="2" />
+                    placeholder="meme" />
                 <Dropdown
                     name="completed"
                     label="Filter by Completed Status:"

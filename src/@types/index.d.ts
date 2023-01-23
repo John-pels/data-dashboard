@@ -1,3 +1,9 @@
+/**
+ *
+ * TypeScript declarations for component props, payloads, and environment variables
+ *
+ */
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
